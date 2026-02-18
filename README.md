@@ -1,57 +1,129 @@
-# Windows Server Active Directory Lab
+# Active Directory Home Lab — Role Based Access Control
 
 ## Overview
 
-This project simulates a small business Windows domain environment designed, deployed, and tested in a virtual lab.
-The goal was to practice real system administration tasks including identity management, access control, security policy enforcement, and recovery validation.
+In this project I built a small company network using Windows Server and a domain-joined workstation.
+The goal was to simulate how businesses manage employee file access using Active Directory groups and NTFS permissions.
 
-Environment represents a company with multiple departments requiring controlled resource access.
-
----
-
-## Lab Environment
-
-* Hypervisor: VirtualBox / VMware
-* Domain: BarnesCorp.local
-* Server Role: Domain Controller
-* Client OS: Windows 10/11 workstation
-* Network Type: Internal NAT network
+The environment enforces department-based access so users can only open folders that belong to their department.
 
 ---
 
-## Objectives
+## Environment
 
-* Deploy Active Directory Domain Services
-* Create organizational unit structure
-* Implement role-based user accounts
-* Apply group policy security controls
-* Configure shared folder permissions
-* Test authentication and access failures
-* Validate backup and restore capability
+**Virtualization**
+
+* Oracle VirtualBox
+
+**Servers**
+
+* Windows Server 2022 — Domain Controller (DC01)
+
+**Client**
+
+* Windows 10/11 Workstation (WS01)
+
+**Domain**
+
+* barnescorp.local
 
 ---
 
-## Network Design
+## Network Configuration
 
-| System | Role                 | Purpose                              |
-| ------ | -------------------- | ------------------------------------ |
-| DC01   | Domain Controller    | Authentication and policy management |
-| WS01   | Employee Workstation | Domain login and access testing      |
+* Internal network: CorpNet
+* Domain Controller IP: 192.168.10.10
+* Workstation IP: 192.168.10.20
+* DNS handled by Domain Controller
+
+---
+
+## Active Directory Structure
+
+Organizational Units:
+
+* IT
+* HR
+* Sales
+
+Security Groups:
+
+* IT_Staff
+* HR_Staff
+* Sales_Staff
+
+Users were created and assigned to their department group.
+
+---
+
+## File Server Configuration
+
+Shared folder:
+
+```
+\\DC01\CompanyData
+```
+
+Department folders:
+
+* IT
+* HR
+* Sales
+
+Permissions model:
+
+Share Permissions:
+
+* Everyone → Full Control (lab simplification)
+
+NTFS Permissions:
+
+* IT_Staff → Access to IT folder only
+* HR_Staff → Access to HR folder only
+* Sales_Staff → Access to Sales folder only
+* Other departments → Access Denied
+
+---
+
+## Testing
+
+A domain workstation was joined to the domain and users logged in to verify access control.
+
+Example test:
+User: msales
+
+Results:
+
+* Sales folder → Accessible
+* IT folder → Access Denied
+* HR folder → Access Denied
+
+Screenshots included in repository.
 
 ---
 
 ## Skills Demonstrated
 
-Active Directory administration
-User and group management
-Group Policy configuration
-Access control enforcement
-Troubleshooting authentication
-System validation and verification
-Documentation and change tracking
+* Active Directory deployment
+* Organizational Unit design
+* Security group management
+* Domain join configuration
+* DNS troubleshooting
+* NTFS permissions
+* Share permissions
+* Role Based Access Control (RBAC)
+* Windows authentication testing
+* Troubleshooting connectivity and login issues
 
 ---
 
-## Project Structure
+## What I Learned
 
-See documentation files for step-by-step configuration and validation results.
+This lab helped me understand how authentication, DNS, and permissions interact in a real environment.
+I also diagnosed issues related to domain discovery, group membership tokens, and network communication between client and server.
+
+---
+
+## Author
+
+Katie Barnes
