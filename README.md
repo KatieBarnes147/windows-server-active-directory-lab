@@ -1,126 +1,98 @@
-# Active Directory Home Lab — Role Based Access Control
+# Windows Server Active Directory Lab
 
 ## Overview
 
-In this project I built a small company network using Windows Server and a domain-joined workstation.
-The goal was to simulate how businesses manage employee file access using Active Directory groups and NTFS permissions.
+This project simulates a small business network built from scratch using Windows Server and a domain-joined workstation.
+The goal was to understand how organizations manage users, authentication, and file access using Active Directory.
 
-The environment enforces department-based access so users can only open folders that belong to their department.
-
----
-
-## Environment
-
-**Virtualization**
-
-* Oracle VirtualBox
-
-**Servers**
-
-* Windows Server 2022 — Domain Controller (DC01)
-
-**Client**
-
-* Windows 10/11 Workstation (WS01)
-
-**Domain**
-
-* barnescorp.local
+Domain: **barnescorp.local**
 
 ---
 
-## Network Configuration
+## Technologies Used
 
-* Internal network: CorpNet
-* Domain Controller IP: 192.168.10.10
-* Workstation IP: 192.168.10.20
-* DNS handled by Domain Controller
+* Windows Server 2022
+* Active Directory Domain Services (AD DS)
+* DNS
+* NTFS Permissions
+* Windows Client Workstation
+* Oracle VirtualBox Networking
 
 ---
 
-## Active Directory Structure
+## Network Design
 
-Organizational Units:
+Departments created:
 
-* IT
 * HR
+* IT
 * Sales
 
-Security Groups:
-
-* IT_Staff
-* HR_Staff
-* Sales_Staff
-
-Users were created and assigned to their department group.
+Each department should only access its own files.
 
 ---
 
-## File Server Configuration
+## 1. Server Installation
 
-Shared folder:
+Windows Server was installed in a virtual environment.
 
-```
-\\DC01\CompanyData
-```
-
-Department folders:
-
-* IT
-* HR
-* Sales
-
-Permissions model:
-
-Share Permissions:
-
-* Everyone → Full Control (lab simplification)
-
-NTFS Permissions:
-
-* IT_Staff → Access to IT folder only
-* HR_Staff → Access to HR folder only
-* Sales_Staff → Access to Sales folder only
-* Other departments → Access Denied
+![Server Install](screenshots/folder1/4.png)
 
 ---
 
-## Testing
+## 2. Domain Controller Promotion
 
-A domain workstation was joined to the domain and users logged in to verify access control.
+The server was promoted to a Domain Controller and the Active Directory domain was created.
 
-Example test:
-User: msales
-
-Results:
-
-* Sales folder → Accessible
-* IT folder → Access Denied
-* HR folder → Access Denied
-
-Screenshots included in repository.
+![Domain Created](screenshots/folder2/10.png)
 
 ---
 
-## Skills Demonstrated
+## 3. Active Directory Configuration
 
-* Active Directory deployment
-* Organizational Unit design
-* Security group management
-* Domain join configuration
-* DNS troubleshooting
-* NTFS permissions
-* Share permissions
-* Role Based Access Control (RBAC)
-* Windows authentication testing
-* Troubleshooting connectivity and login issues
+Organizational Units, users, and security groups were created.
+
+![Active Directory](screenshots/folder3/11.png)
+
+---
+
+## 4. Client Domain Join
+
+A workstation was joined to the domain and authenticated with domain credentials.
+
+![Client Join](screenshots/folder4/12.png)
+
+---
+
+## 5. Access Control Testing
+
+Shared folders were configured and tested using a Sales user account.
+
+Sales user:
+
+* Access allowed: Sales folder
+* Access denied: HR and IT folders
+
+![Access Test 1](screenshots/folder5/IMAGE2.png)
+![Access Test 2](screenshots/folder5/IMAGE3.png)
+![Access Test 3](screenshots/folder5/IMAGE4.png)
+![Access Test 4](screenshots/folder5/IMAGE5.png)
+
+---
+
+## Troubleshooting Performed
+
+* DNS configuration preventing domain join
+* User authentication failures
+* Network adapter connectivity in virtual network
+* NTFS permission inheritance conflicts
 
 ---
 
 ## What I Learned
 
-This lab helped me understand how authentication, DNS, and permissions interact in a real environment.
-I also diagnosed issues related to domain discovery, group membership tokens, and network communication between client and server.
+This lab demonstrated how authentication relies on DNS, and how group membership controls authorization in enterprise environments.
+It also reinforced troubleshooting workflow for real domain environments.
 
 ---
 
