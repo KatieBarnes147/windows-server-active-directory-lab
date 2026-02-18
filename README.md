@@ -36,7 +36,7 @@ Each department should only access its own files.
 
 Windows Server was installed in a virtual environment.
 
-![Server Install](screenshots/folder1/4.png)
+![Server Install](screenshots/1-installation/4.png)
 
 ---
 
@@ -44,7 +44,7 @@ Windows Server was installed in a virtual environment.
 
 The server was promoted to a Domain Controller and the Active Directory domain was created.
 
-![Domain Created](screenshots/folder2/10.png)
+![Domain Created](screenshots/2-domain-controller/10.png)
 
 ---
 
@@ -52,7 +52,7 @@ The server was promoted to a Domain Controller and the Active Directory domain w
 
 Organizational Units, users, and security groups were created.
 
-![Active Directory](screenshots/folder3/11.png)
+![Active Directory](screenshots/3-active-directory/11.png)
 
 ---
 
@@ -60,7 +60,7 @@ Organizational Units, users, and security groups were created.
 
 A workstation was joined to the domain and authenticated with domain credentials.
 
-![Client Join](screenshots/folder4/12.png)
+![Client Join](screenshots/4-client-join/12.png)
 
 ---
 
@@ -73,10 +73,10 @@ Sales user:
 * Access allowed: Sales folder
 * Access denied: HR and IT folders
 
-![Access Test 1](screenshots/folder5/IMAGE2.png)
-![Access Test 2](screenshots/folder5/IMAGE3.png)
-![Access Test 3](screenshots/folder5/IMAGE4.png)
-![Access Test 4](screenshots/folder5/IMAGE5.png)
+![Access Test 1](screenshots/5-permissions/IMAGE2.png)
+![Access Test 2](screenshots/5-permissions/IMAGE3.png)
+![Access Test 3](screenshots/5-permissions/IMAGE4.png)
+![Access Test 4](screenshots/5-permissions/IMAGE5.png)
 
 ---
 
@@ -91,7 +91,7 @@ Sales user:
 
 ## What I Learned
 
-This lab demonstrated how authentication relies on DNS, and how group membership controls authorization in enterprise environments.
+This lab demonstrated how authentication relies on DNS and how group membership controls authorization in enterprise environments.
 It also reinforced troubleshooting workflow for real domain environments.
 
 ---
